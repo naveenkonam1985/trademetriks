@@ -8,7 +8,7 @@ st.set_page_config(page_title="Trademetriks", layout="wide")
 
 
 # Linking CSS
-with open('style.css') as css:
+with open('./style/style.css') as css:
     st.markdown(f'<style>{css.read()}</style>', unsafe_allow_html = True)
 
 # Title

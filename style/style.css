@@ -1,0 +1,76 @@
+
+/*Reduce space at the top*/
+.block-container
+{
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+/* header display none*/
+[data-testid="stHeader"] {display: none}
+
+/*Title*/
+.title {
+    font-weight: bold;
+    font-style: italic;
+    font-size: 30px;
+}
+
+/* Margin between paragarphs 0*/
+p{
+    margin:0px;
+}
+
+/*style for paravgraph with class value*/
+p.value {
+    font-weight: bold;
+    font-size: larger;
+    color: white;
+}
+
+/*Block style around KPI*/
+.banner {
+    display: flex;
+    align-items:center ;
+    justify-content: space-between;
+    /*border: 1px solid black;*/
+    border-radius: 0.5rem;
+    /*min-height: 25px;*/
+    padding: 10px;
+    box-shadow: 0px 0px 15px 5px gainsboro;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+/*KPI labels style*/
+.kpi {
+    display: block;
+    border-radius: 0.5rem;
+    min-width: 220px;
+    text-align: center;
+    padding:5px;
+    margin: 0px;
+}
+
+
+/* Streamlit columns style*/
+[data-testid="stHorizontalBlock"] > [data-testid="column"] > [data-testid="stVerticalBlockBorderWrapper"]{
+    display: flex;
+    /*border: 0.5px groove #5865f5;*/
+    border-radius: 10px;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    box-shadow: 0px 0px 15px 5px gainsboro;
+    justify-content: space-evenly;
+
+}
+
+/* Footer style*/ 
+.developer {
+    font-style: italic;
+    display: flex;
+    justify-content: space-between;
+}

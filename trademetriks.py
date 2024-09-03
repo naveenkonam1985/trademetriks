@@ -76,7 +76,9 @@ cum_df = trades_net_df.reset_index()[["date_converted","netTrade"]].groupby("dat
 cum_df = cum_df.reset_index()
 cum_df["cumulative_value"] = cum_df["netTrade"].cumsum()
 cum_df["day"] = pd.to_datetime(cum_df["date_converted"], dayfirst=True).dt.weekday
-win_rate = round(cum_df[cum_df["netTrade"]>=0]['netTrade'].count() / (-1*cum_df[cum_df["netTrade"]<0]['netTrade']).count(),2)
+wins_count = cum_df[cum_df["netTrade"]>=0]['netTrade'].count()
+loss_count = cum_df[cum_df["netTrade"]<0]['netTrade'].count()
+win_rate = round(wins_count/ (wins_count+loss_count),2)
 pl_ratio = round(cum_df[cum_df["netTrade"]>=0]['netTrade'].sum() / (-1*cum_df[cum_df["netTrade"]<0]['netTrade']).sum(),2)
 
 #Daywise Aggregation

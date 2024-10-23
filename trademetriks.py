@@ -86,6 +86,7 @@ daywise_agg_df = cum_df[["day","netTrade"]].groupby("day").sum().reset_index()
 daywise_agg_df["day_of_week"] = daywise_agg_df["day"].apply(get_day_number)
 daywise_agg_df = daywise_agg_df.sort_values("day")
 
+
 # Monthwise Aggregation
 trades_month_stock_df = trades_df[["intraCheck","netTrade","month","symbol_extracted","date_converted"]].groupby(["date_converted","symbol_extracted","month"]).sum()
 trades_month_stock_df = trades_month_stock_df[trades_month_stock_df["intraCheck"]==0]
@@ -111,34 +112,34 @@ trades_inst_df = trades_inst_df[trades_inst_df["intraCheck"]==0].reset_index()[[
 # banner with div tags
 st.markdown(
     f"""<div class = "banner">
-        <div class="kpi" style="background-color:#FF9500">
-            <p>{"Gross Profit" if gross_p_and_l >=0 else "Gross Loss"}</p>
-            <p class="value">{gross_p_and_l} Rs</p>
-        </div>
-        <div class="kpi" style="background-color:#00C3FF">
-            <p>{"Today Profit" if last_profit>=0 else "Today Loss"}</p>
-            <p class="value">{last_profit} Rs</p>
-        </div>
-        <div class="kpi" style="background-color:#B86C6C">
-            <p>{"Month Profit" if month_p_and_l>=0 else "Month Loss"}</p>
-            <p class="value">{month_p_and_l} Rs</p>
-        </div>
-        <div class="kpi" style="background-color:#FF9696">
-            <p>Win rate</p>
-            <p class="value">{win_rate}</p>
-        </div>
-        <div class="kpi" style="background-color:#9BDE43">  
-            <p>P/L ratio</p>
-            <p class="value">{pl_ratio}</p>
-        </div>
-        <div class="kpi" style="background-color:#FF78E0">
-            <p>Avg stocks traded daily<p>
-            <p class="value">{avg_stocks_traded}</p>
-        </div>
-        <div class="kpi" style="background-color:#969AFF">
-            <p>Avg amount traded daily</p>
-            <p class="value">{avg_amount_traded} Rs</p>
-        </div>
+            <div class="kpi" style="background-color:#FF9500">
+                <p>{"Gross Profit" if gross_p_and_l >=0 else "Gross Loss"}</p>
+                <p class="value">{gross_p_and_l} Rs</p>
+            </div>
+            <div class="kpi" style="background-color:#00C3FF">
+                <p>{"Today Profit" if last_profit>=0 else "Today Loss"}</p>
+                <p class="value">{last_profit} Rs</p>
+            </div>
+            <div class="kpi" style="background-color:#B86C6C">
+                <p>{"Month Profit" if month_p_and_l>=0 else "Month Loss"}</p>
+                <p class="value">{month_p_and_l} Rs</p>
+            </div>
+            <div class="kpi" style="background-color:#FF9696">
+                <p>Win rate</p>
+                <p class="value">{win_rate}</p>
+            </div>
+            <div class="kpi" style="background-color:#9BDE43">  
+                <p>P/L ratio</p>
+                <p class="value">{pl_ratio}</p>
+            </div>
+            <div class="kpi" style="background-color:#FF78E0">
+                <p>Avg stocks traded daily<p>
+                <p class="value">{avg_stocks_traded}</p>
+            </div>
+            <div class="kpi" style="background-color:#969AFF">
+                <p>Avg amount traded daily</p>
+                <p class="value">{avg_amount_traded} Rs</p>
+            </div>
     </div>""",unsafe_allow_html=True)
 
 
@@ -157,7 +158,7 @@ col1_ch1, col2_ch1, col3_ch1 = st.columns(3, gap="medium")
 with col1_ch1:
     with st.container():
         st.markdown('<p class="kpi">Cumulative Profit or Loss</p>', unsafe_allow_html = True)
-        st.line_chart(cum_df,x="date_converted",y="cumulative_value",color=["#FF6666"],height=290)
+        st.line_chart(cum_df,x="date_converted",y="cumulative_value",color=["#FF6666"],height=290, x_label="Date",y_label="Amount")
     
 with col2_ch1:
     with st.container():
@@ -168,9 +169,9 @@ with col2_ch1:
 with col3_ch1:
     with st.container():
         st.markdown('<p class="kpi">Week Day wise Profit or Loss</p>', unsafe_allow_html = True)
-        st.bar_chart(daywise_agg_df, x="day_of_week", y="netTrade", horizontal=True, height=290,color="netTrade")
+        st.bar_chart(daywise_agg_df, x="day_of_week", y="netTrade", x_label="Day of Week",y_label="Net Trade", horizontal=True,                      height=290,color="netTrade")
+        
 
-    
 
 # Chart Layout2
 #st.markdown(
@@ -185,7 +186,7 @@ col1_ch2, col2_ch2, col3_ch2 = st.columns([0.24,0.24,0.42], gap="medium")
 with col1_ch2:
     with st.container():
         st.markdown('<p class="kpi">Monthwise Profit Loss</p>', unsafe_allow_html = True)
-        st.bar_chart(trades_month_agg_df,x="monthName",y="netTrade",use_container_width=True, height=275)
+        st.bar_chart(trades_month_agg_df,x="monthName",y="netTrade",use_container_width=True, height=275,x_label="Month", y_label="Amount")
         
 
 with col2_ch2:

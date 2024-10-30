@@ -92,7 +92,13 @@ trades_month_stock_df = trades_df[["intraCheck","netTrade","month","symbol_extra
 trades_month_stock_df = trades_month_stock_df[trades_month_stock_df["intraCheck"]==0]
 trades_month_agg_df = trades_month_stock_df.reset_index()[['month', 'netTrade']].groupby('month').sum().round(2).reset_index()
 trades_month_agg_df["monthName"] = trades_month_agg_df["month"].apply(get_month_name)
-month_p_and_l = trades_month_agg_df[trades_month_agg_df["month"]==datetime.datetime.now().date().month]["netTrade"].reset_index().loc[0,"netTrade"]
+
+
+#Added month p&l code validation as month cahngeover giving error
+# Code added on 30th Oct 24
+month_p_and_l = 0
+if datetime.datetime.now().date().month in trades_month_agg_df["month"].tolist():
+    month_p_and_l = trades_month_agg_df[trades_month_agg_df["month"]==datetime.datetime.now().date().month]["netTrade"].reset_index().loc[0,"netTrade"]
 
 # Last Day Profit
 last_profit = trades_net_df.reset_index()[["date_converted", "netTrade"]].groupby("date_converted").sum().sort_values("date_converted",ascending=False).reset_index().iloc[0,1].round(2)
